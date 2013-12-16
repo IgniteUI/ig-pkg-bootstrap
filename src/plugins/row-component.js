@@ -7,7 +7,8 @@ define(["./_default-component"], function (BootstrapComponent) {
 		render: function (container, descriptor) {
 			$(container).empty();
 			var $this = this;
-			var parent = $("<div></div>").appendTo(container).css("padding", 10), el = descriptor.element, w = "150px";
+			var parent = $("<div></div>").appendTo(container).addClass("bootstrap-row-adorner")
+				.css("padding", 10), el = descriptor.element, w = "150px";
 			// don't hardcode the default number of columns but take it from the running config
 			var currentVal, session = descriptor.editorSession;
 			if (el.hasClass("row")) {
@@ -30,9 +31,9 @@ define(["./_default-component"], function (BootstrapComponent) {
 				}
 			});
 			*/
-			$("<span class=\"label\">Id: </span><input type=\"text\" class=\"id form-control\"></input>").appendTo(parent).css("width", w);
-			$("<span class=\"label\">Classes: </span><input type=\"text\" class=\"classes form-control\"></input>").appendTo(parent).css("width", w);
-			$("<h3></h3>").appendTo(parent).text("Grid Layout").addClass("label").css({
+			$("<span class=\"label adorner-label\">Id: </span><input type=\"text\" class=\"id form-control\"></input>").appendTo(parent).css("width", w);
+			$("<span class=\"label adorner-label\">Classes: </span><input type=\"text\" class=\"classes form-control\"></input>").appendTo(parent).css("width", w);
+			$("<h3></h3>").appendTo(parent).text("Grid Layout").addClass("label adorner-label").css({
 				"padding-bottom": 10,
 				"display": "block",
 				"float": "left"
@@ -62,7 +63,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 				"margin-top": 10
 			}).hide();
 			$("<button></button").appendTo(parent).addClass("btn btn-success").css("width", w)
-				.css("margin-top", 20).text("Add Column Span").click(function () {
+				.css("margin-top", 10).text("Add Column Span").click(function () {
 				var markupCode = $this.getCodeEditorMarkupSnippet({type: "column"});
 				var markup = $this.getMarkup({type: "column"});
 				// TODO: actually insert the new colspan :)
@@ -86,7 +87,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 				var textarr = text.split("-");
 				// for the length of textarr, create that # of spans. if they already exist, don't touch them
 				var htmlrange = descriptor.htmlMarker.range;
-				var r = new descriptor.rangeClass(htmlrange.start.row + 1, 0, htmlrange.end.row, 0);
+				var r = new descriptor.rangeClass(htmlrange.start.row + 1, 0, htmlrange.end.row - 1, 0);
 				// wipe out what's already there - TODO - preserve markup
 				var newColsCode = "", tmpObj, totalLineCount = 0, newHtmlCode = "";
 				for (var i = 0; i < textarr.length; i++) {
