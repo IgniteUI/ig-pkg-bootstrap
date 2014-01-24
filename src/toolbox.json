@@ -2,6 +2,8 @@
 	"name": "bootstrap",
 	"toolboxTitle": "Bootstrap",
 	"iconsPath": "icons",
+    "iconSpriteCssFile": "bootstrap-icons.css",
+    "iconSpriteCssPrefix": "bootstrap-icons", 
   "scripts": [
   ],
   "stylesheets": [
@@ -16,7 +18,7 @@
 			"id": "row",
 			"toolboxTitle": "Row",
 			"componentPlugin": "row-component",
-			"icon": "row.png",
+			"icon": "rowicon.png",
 			"dragDropIcon": "row-dragdrop.png",
 			"category": "layout",
 			"visual": true,
@@ -28,7 +30,7 @@
 			"id": "column",
 			"toolboxTitle": "Column",
 			"componentPlugin": "column-component",
-			"icon": "column.png",
+			"icon": "columnicon.png",
 			"dragDropIcon": "column-dragdrop.png",
 			"category": "layout",
 			"visual": true,
