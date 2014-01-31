@@ -6,10 +6,10 @@ define(["./_default-component"], function (BootstrapComponent) {
 		},
 		render: function (container, descriptor) {
 			var $this = this,
-				content = container.closest(".adorner-content"),
+				content = container.closest(".adorner-props-list"),
 				parent = $("<div></div>").appendTo(content.empty()).addClass("bootstrap-row-adorner")
 				.css("padding", 10), el = descriptor.element, w = "150px";
-			
+			$(".adorner-events-list").hide();
 			// don't hardcode the default number of columns but take it from the running config
 			var currentVal, session = descriptor.editorSession;
 			if (el.hasClass("row")) {
