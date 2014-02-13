@@ -6,8 +6,8 @@ define(["./_default-component"], function (BootstrapComponent) {
 		},
 		render: function (container, descriptor) {
 			var $this = this,
-				parent = $("<div></div>").appendTo(container).addClass("bootstrap-row-adorner")
-				.css("padding", 10), el = descriptor.element, w = "150px";
+				parent = container.addClass("bootstrap-row-adorner"), 
+				el = descriptor.element, w = "150px";
 			// don't hardcode the default number of columns but take it from the running config
 			var currentVal, session = descriptor.editorSession;
 			if (el.hasClass("row")) {
@@ -30,37 +30,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 				}
 			});
 			*/
-			$("<span class=\"label adorner-label\">Id: </span><input type=\"text\" class=\"id form-control\"></input>").appendTo(parent).css("width", w);
-			$("<span class=\"label adorner-label\">Classes: </span><input type=\"text\" class=\"classes form-control\"></input>").appendTo(parent).css("width", w);
-			$("<h3></h3>").appendTo(parent).text("Grid Layout").addClass("label adorner-label").css({
-				"padding-bottom": 10,
-				"display": "block",
-				"float": "left"
-			});
-			// append dropdown with list of layouts
-			var dd = $("<div></div>").appendTo(parent).addClass("btn-group");
-			var button = $("<button></button").appendTo(dd).attr("type", "button")
-				.addClass("btn btn-primary dropdown-toggle").attr("data-toggle", "dropdown");
-			button.css("width", w);
-			$("<span></span>").appendTo(button).addClass("label").text("Choose Layout ");
-			$("<span class=\"caret\"></span>").appendTo(button);
-			var list = $("<ul></ul>").appendTo(dd).addClass("dropdown-menu")
-				.attr("id", "grid-layout-dd").attr("role", "menu").css("width", w);
-			// add list items
-			$("<li></li>").appendTo(list).append("<a href=\"#\">6-6</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">4-4-4</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">4-8</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">8-4</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">3-3-3-3</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">2-10</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">10-2</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">3-9</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">9-3</a>");
-			$("<li></li>").appendTo(list).append("<a href=\"#\">Custom</a>");
-			$("<input type=\"text\" class=\"custom-layout form-control\"></input>").appendTo(parent).css({
-				"width": w,
-				"margin-top": 10
-			}).hide();
+			this._createMarkup(parent, w);
 			$("<button></button").appendTo(parent).addClass("btn btn-success").css("width", w)
 				.css("margin-top", 10).text("Add Column Span").click(function () {
 				var markupCode = $this.getCodeEditorMarkupSnippet({type: "column"});
@@ -71,7 +41,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 			$("#grid-layout-dd > li > a").click(function (event) {
 				// update value
 				var text = $(this).text();
-				button.find(".label").text(text);
+				$('.btn-primary.dropdown-toggle').find(".label").text(text);
 				if (text === "Custom") {
 					$(".custom-layout.form-control").show();
 					event.preventDefault();
@@ -150,6 +120,29 @@ define(["./_default-component"], function (BootstrapComponent) {
 				// update code editor
 				
 			});
+		},
+		_createMarkup: function (parent, width) {
+			var markup = "";
+			markup += "<div class=\"adorner-label\">Id: </div><input type=\"text\" class=\"id form-control\"></input>";
+			markup += "<div class=\"adorner-label\">Classes: </div><input type=\"text\" class=\"classes form-control\"></input>";
+			markup += "<div class='adorner-label'>Grid Layout</div>";
+			markup += "<div class='btn-group'>";
+			markup += "<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'><span class='label'>Choose Layout </span><span class=\"caret\"></span></button>";
+			markup += "<ul id='grid-layout-dd' class='dropdown-menu' data-role='menu'>";
+			// add list items
+			markup += "<li><a href=\"#\">6-6</a></li>";
+			markup += "<li><a href=\"#\">4-4-4</a></li>";
+			markup += "<li><a href=\"#\">4-8</a></li>";
+			markup += "<li><a href=\"#\">8-4</a></li>";
+			markup += "<li><a href=\"#\">3-3-3-3</a></li>";
+			markup += "<li><a href=\"#\">2-10</a></li>";
+			markup += "<li><a href=\"#\">10-2</a></li>";
+			markup += "<li><a href=\"#\">3-9</a></li>";
+			markup += "<li><a href=\"#\">9-3</a></li>";
+			markup += "<li><a href=\"#\">Custom</a></li>";
+			markup += "</ul></div>";
+			markup += "<input type=\"text\" class=\"custom-layout form-control\" style='display: none;' />";
+			parent.empty().append(markup);
 		}
 	});
 	return BootstrapRow;
