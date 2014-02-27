@@ -55,7 +55,7 @@ define(function (require, exports, module) {
         };
       } else {
         return {
-          codeString: "\t\t<div class=\"row\">\n" +
+          codeString: descriptor.ide._tabStr(descriptor.extraIndent + 1) + "<div id=\"" + descriptor.id + "\" class=\"row\">\n" +
             "\t\t\t<div class=\"col-md-4\">\n" + 
             "\t\t\t\t<h3>Span 4</h3>\n" +
             "\t\t\t\t<p>Contents</p>\n" +
