@@ -138,6 +138,9 @@ define(function (require, exports, module) {
         return $(descriptor).find("div[data-droppablechild]");
       }
       return $();
+    },
+    discoverComponents: function (descriptor) {
+        console.log("discovering bootstrap");
     }
   });
   return BootstrapComponent;
