@@ -141,6 +141,10 @@ define(function (require, exports, module) {
     },
     discoverComponents: function (descriptor) {
         console.log("discovering bootstrap");
+        // we are looking for DIV elements which have a "row" class applied, and have one or more DIVs marked with a "column" class
+        // if we see such a structure, we assume that it's a bootstrap row.
+        // since bootstrap is HTML-only, we aren't going to parse any js
+        
     }
   });
   return BootstrapComponent;
