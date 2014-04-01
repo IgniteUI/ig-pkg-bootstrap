@@ -31,12 +31,15 @@ define(["./_default-component"], function (BootstrapComponent) {
 			});
 			*/
 			this._createMarkup(parent, w);
+			// hide Add column span button
+			/*
 			$("<button></button").appendTo(parent).addClass("btn btn-success").css("width", w)
 				.css("margin-top", 10).text("Add Column Span").click(function () {
 				var markupCode = $this.getCodeEditorMarkupSnippet({type: "column"});
 				var markup = $this.getMarkup({type: "column"});
 				// TODO: actually insert the new colspan :)
 			});
+			*/
 			// attach events
 			$("#grid-layout-dd > li > a").click(function (event) {
 				// update value
