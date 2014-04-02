@@ -33,7 +33,7 @@ define(function (require, exports, module) {
           colSpan = this._getDefaultColSpan(descriptor);
         }
         //return "<div data-droppablechild=\"true\" class=\"col-md-" + colSpan + "\"><h3>Span " + colSpan + "</h3><p>Contents</p></div>";
-        return "<div data-droppablechild=\"true\" class=\"col-md-" + colSpan + "\" data-type='container'></div>";
+        return "<div data-droppablechild=\"true\" class=\"col-md-" + colSpan + "\"></div>";
       }
     },
     getCodeEditorMarkupSnippet: function (descriptor) {
