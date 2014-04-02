@@ -30,7 +30,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 				}
 			});
 			*/
-			this._createMarkup(parent, w);
+			this._createMarkup(parent, w, descriptor);
 			// hide Add column span button
 			/*
 			$("<button></button").appendTo(parent).addClass("btn btn-success").css("width", w)
@@ -124,29 +124,46 @@ define(["./_default-component"], function (BootstrapComponent) {
 				
 			});
 		},
-		_createMarkup: function (parent, width) {
+		_createMarkup: function (parent, width, descriptor) {
 			var markup = "";
 			markup += "<div class=\"adorner-label\">Id: </div><input type=\"text\" class=\"id form-control\"></input>";
 			markup += "<div class=\"adorner-label\">Classes: </div><input type=\"text\" class=\"classes form-control\"></input>";
 			markup += "<div class='adorner-label'>Grid Layout</div>";
 			markup += "<div class='btn-group'>";
 			markup += "<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'><span class='label'>Choose Layout </span><span class=\"caret\"></span></button>";
-			markup += "<ul id='grid-layout-dd' class='dropdown-menu' data-role='menu'>";
-			// add list items
-			markup += "<li><a href=\"#\">6-6</a></li>";
-			markup += "<li><a href=\"#\">4-4-4</a></li>";
-			markup += "<li><a href=\"#\">4-8</a></li>";
-			markup += "<li><a href=\"#\">8-4</a></li>";
-			markup += "<li><a href=\"#\">3-3-3-3</a></li>";
-			markup += "<li><a href=\"#\">2-10</a></li>";
-			markup += "<li><a href=\"#\">10-2</a></li>";
-			markup += "<li><a href=\"#\">3-9</a></li>";
-			markup += "<li><a href=\"#\">9-3</a></li>";
-			//A.T. 168952
-			//markup += "<li><a href=\"#\">Custom</a></li>";
-			markup += "</ul></div>";
+
+			// disable changing the layout, if bootstrap columns aren't empty
+			var empty = true;
+			var cols = descriptor.element.children();
+			for (var i = 0; i < cols.length; i++) {
+				if ($(cols[i]).children().length > 0) {
+					empty = false;
+					break;
+				}
+			}
+			if (empty) {
+				markup += "<ul id='grid-layout-dd' class='dropdown-menu' data-role='menu'>";
+				// add list items
+				markup += "<li><a href=\"#\">6-6</a></li>";
+				markup += "<li><a href=\"#\">4-4-4</a></li>";
+				markup += "<li><a href=\"#\">4-8</a></li>";
+				markup += "<li><a href=\"#\">8-4</a></li>";
+				markup += "<li><a href=\"#\">3-3-3-3</a></li>";
+				markup += "<li><a href=\"#\">2-10</a></li>";
+				markup += "<li><a href=\"#\">10-2</a></li>";
+				markup += "<li><a href=\"#\">3-9</a></li>";
+				markup += "<li><a href=\"#\">9-3</a></li>";
+				//A.T. 168952
+				//markup += "<li><a href=\"#\">Custom</a></li>";
+				markup += "</ul>";
+			}
+			markup += "</div>";
 			markup += "<input type=\"text\" class=\"custom-layout form-control\" style='display: none;' />";
 			parent.empty().append(markup);
+			if (!empty) {
+				parent.find(".btn-group").attr("title", "Cannot modify layout because default content has been modified.");
+				parent.find("button").attr("disabled", "").css("color", "white");
+			}
 		}
 	});
 	return BootstrapRow;
