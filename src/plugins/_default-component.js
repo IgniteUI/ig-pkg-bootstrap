@@ -32,7 +32,8 @@ define(function (require, exports, module) {
           // get the default one
           colSpan = this._getDefaultColSpan(descriptor);
         }
-        return "<div data-droppablechild=\"true\" class=\"col-md-" + colSpan + "\"><h3>Span " + colSpan + "</h3><p>Contents</p></div>";
+        //return "<div data-droppablechild=\"true\" class=\"col-md-" + colSpan + "\"><h3>Span " + colSpan + "</h3><p>Contents</p></div>";
+        return "<div data-droppablechild=\"true\" class=\"col-md-" + colSpan + "\" data-type='container'></div>";
       }
     },
     getCodeEditorMarkupSnippet: function (descriptor) {
@@ -48,46 +49,46 @@ define(function (require, exports, module) {
         }
         return {
           codeString: indentStr + "<div class=\"col-md-" + colSpan + "\">\n" +
-            indentStr + "\t<h3>Span " + colSpan + "</h3>\n" +
-            indentStr + "\t<p>Contents</p>\n" +
+         //   indentStr + "\t<h3>Span " + colSpan + "</h3>\n" +
+         //   indentStr + "\t<p>Contents</p>\n" +
             indentStr + "</div>\n",
-          lineCount: 4
+          lineCount: 2
         };
       } else {
         return {
           codeString: descriptor.ide._tabStr(descriptor.extraIndent + 1) + "<div id=\"" + descriptor.id + "\" class=\"row\">\n" +
             "\t\t\t<div class=\"col-md-4\">\n" + 
-            "\t\t\t\t<h3>Span 4</h3>\n" +
-            "\t\t\t\t<p>Contents</p>\n" +
+          //  "\t\t\t\t<h3>Span 4</h3>\n" +
+          //  "\t\t\t\t<p>Contents</p>\n" +
             "\t\t\t</div>\n" +
             "\t\t\t<div class=\"col-md-4\">\n" +
-            "\t\t\t\t<h3>Span 4</h3>\n" +
-            "\t\t\t\t<p>Contents</p>\n" +
+          //  "\t\t\t\t<h3>Span 4</h3>\n" +
+          //  "\t\t\t\t<p>Contents</p>\n" +
             "\t\t\t</div>\n" +
             "\t\t\t<div class=\"col-md-4\">\n" +
-            "\t\t\t\t<h3>Span 4</h3>\n" +
-            "\t\t\t\t<p>Contents</p>\n" +
+          //  "\t\t\t\t<h3>Span 4</h3>\n" +
+          //  "\t\t\t\t<p>Contents</p>\n" +
             "\t\t\t</div>\n" +
             "\t\t</div>\n",
-          lineCount: 14,
+          lineCount: 8,
           // contains offsets from parent only only
           extraMarkers: [
             {
               rowOffset: 1,
               colOffset: 0,
-              rowCount: 4,
+              rowCount: 2,
+              colCount: 0
+            },
+            {
+              rowOffset: 3,
+              colOffset: 0,
+              rowCount: 2, 
               colCount: 0
             },
             {
               rowOffset: 5,
               colOffset: 0,
-              rowCount: 4, 
-              colCount: 0
-            },
-            {
-              rowOffset: 9,
-              colOffset: 0,
-              rowCount: 4,
+              rowCount: 2,
               colCount: 0
             }
           ]
