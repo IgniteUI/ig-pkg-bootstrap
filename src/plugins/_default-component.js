@@ -90,6 +90,12 @@ define(function (require, exports, module) {
               colOffset: 0,
               rowCount: 2,
               colCount: 0
+            },
+			{
+              rowOffset: 7,
+              colOffset: 0,
+              rowCount: 2,
+              colCount: 0
             }
           ]
         };
