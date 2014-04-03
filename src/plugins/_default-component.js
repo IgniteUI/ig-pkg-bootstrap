@@ -140,6 +140,24 @@ define(function (require, exports, module) {
       }
       return $();
     },
+    setRuntimeMetadata: function (component) {
+      var $c = $(component);
+      if ($c.hasClass("row")) {
+        $c.attr("data-hasdroppables", true);
+        $c.children().each(function () {
+          var col = $(this);
+          col.attr("data-droppablechild", true);
+          if (col.children("div").length === 0) {
+            col.addClass("empty-container");
+          }
+        });
+      } else if ($c.is('div[class^="col-"]')) {
+        $c.attr("data-droppablechild", true);
+        if ($c.children("div").length === 0) {
+            $c.addClass("empty-container");
+        }
+      }
+    },
     discoverComponents: function (descriptor) {
         console.log("discovering bootstrap");
         // we are looking for DIV elements which have a "row" class applied, and have one or more DIVs marked with a "column" class

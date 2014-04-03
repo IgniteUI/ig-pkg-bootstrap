@@ -8,6 +8,9 @@ define(["./_default-component"], function (BootstrapComponent) {
 			var $this = this,
 				parent = container.addClass("bootstrap-row-adorner"), 
 				el = descriptor.element, w = "150px";
+
+			container.empty(); // 168980
+
 			// don't hardcode the default number of columns but take it from the running config
 			var currentVal, session = descriptor.editorSession;
 			if (el.hasClass("row")) {
@@ -78,6 +81,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 			});
 			// "change" is the better event here, but "keyup" is just so much cooler ! 
 			$(".id.form-control").keyup(function (event) {
+				var oldVal = el.attr("id");
 				el.attr("id", this.value);
 				// update code editor
 				// locate code fragment by marker
@@ -97,6 +101,9 @@ define(["./_default-component"], function (BootstrapComponent) {
 					code = code.replace("<div ", "<div id=\"" + this.value + "\" ");
 				}
 				session.replace(r, code);
+				// we need to replace the previous with the new value in the componentIds array, otherwise we may not be able to retrieve the 
+				// component object any more
+				$this.settings.ide._updateId(oldVal, this.value);
 			});
 			//"change" evt better
 			$(".classes.form-control").keyup(function (event) {
