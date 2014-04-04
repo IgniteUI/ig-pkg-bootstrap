@@ -5,7 +5,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 			return this;
 		},
 		render: function (container, descriptor) {
-			var $this = this,
+			var $this = this, i, 
 				parent = container.addClass("bootstrap-row-adorner"), 
 				el = descriptor.element, w = "150px";
 
@@ -65,15 +65,30 @@ define(["./_default-component"], function (BootstrapComponent) {
 				var r = new descriptor.rangeClass(htmlrange.start.row + 1, 0, htmlrange.end.row - 1, 0);
 				// wipe out what's already there - TODO - preserve markup
 				var newColsCode = "", tmpObj, totalLineCount = 0, newHtmlCode = "";
-				for (var i = 0; i < textarr.length; i++) {
+				for (i = 0; i < textarr.length; i++) {
 					tmpObj = $this.getCodeEditorMarkupSnippet({type: "column", colSpan: textarr[i], extraIndent: 1});
 					totalLineCount += tmpObj.lineCount;
 					newColsCode += tmpObj.codeString;
 					newHtmlCode += $this.getMarkup({type: "column", colSpan: textarr[i]});
 				}
+				//regenerate markers
+				var childMarkers = descriptor.htmlMarker.extraMarkers;
+				childMarkers.children = [];
+				// regenerate markers
+				var offset = htmlrange.start.row + 1;
+				var total = 0;
 				//1. update code editor
 				//do we use the totalLineCount for sth?
 				session.replace(r, newColsCode);
+				// finally update the parent marker so that it's also correct
+				$this.settings.ide.session.removeMarker(descriptor.htmlMarker.id);
+				for (i = 0; i < textarr.length; i++) {
+					var mkr = $this.settings.ide.createAndAddMarker(offset + i*2 + 1, 0, offset + i*2 + 2, 0);
+					total += 2;
+					childMarkers.children.push(mkr);
+				}
+				//recreate it
+				descriptor.htmlMarker.range = $this.settings.ide.createAndAddMarker(offset - 1, 0,  offset + total + 1, 0);
 				// now update the DOM of the designer/view
 				el.html(newHtmlCode);
 				// now update the markup 
