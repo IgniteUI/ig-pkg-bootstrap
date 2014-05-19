@@ -5,7 +5,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 			return this;
 		},
 		render: function (container, descriptor) {
-			var $this = this, i, 
+			var $this = this, i, elementID = descriptor.element.attr("id") !== undefined ? descriptor.element.attr("id") : "",
 				parent = container.addClass("bootstrap-row-adorner"), 
 				el = descriptor.element, w = "150px";
 
@@ -94,6 +94,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 				// now update the markup 
 				event.preventDefault();
 			});
+			$(".id.form-control").val(elementID);
 			// "change" is the better event here, but "keyup" is just so much cooler ! 
 			$(".id.form-control").keyup(function (event) {
 				var oldVal = el.attr("id");
