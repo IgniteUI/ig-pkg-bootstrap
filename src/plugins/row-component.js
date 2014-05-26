@@ -10,7 +10,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 				el = descriptor.element, w = "150px";
 
 			container.empty(); // 168980
-
+			container.siblings(".adorner-custom-footer").hide();
 			// don't hardcode the default number of columns but take it from the running config
 			var currentVal, session = descriptor.editorSession;
 			if (el.hasClass("row")) {
