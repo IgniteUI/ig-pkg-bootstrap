@@ -47,6 +47,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 			$("#grid-layout-dd > li > a").click(function (event) {
 				// update value
 				var text = $(this).text();
+				descriptor.comp.config = text;
 				$('.btn-primary.dropdown-toggle').find(".label").text(text);
 				if (text === "Custom") {
 					$(".custom-layout.form-control").show();
@@ -148,13 +149,15 @@ define(["./_default-component"], function (BootstrapComponent) {
 			});
 		},
 		_createMarkup: function (parent, width, descriptor) {
-			var markup = "";
+			var markup = "", layoutText = "4-4-4"; // default layoutText
 			markup += "<div class=\"adorner-label\">Id: </div><input type=\"text\" class=\"id form-control\"></input>";
 			markup += "<div class=\"adorner-label\">Classes: </div><input type=\"text\" class=\"classes form-control\"></input>";
 			markup += "<div class='adorner-label'>Grid Layout</div>";
 			markup += "<div class='btn-group'>";
-			markup += "<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'><span class='label'>Choose Layout </span><span class=\"caret\"></span></button>";
-
+			if (descriptor.comp.config) {
+				layoutText = descriptor.comp.config;
+			}
+			markup += "<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'><span class='label'>" + layoutText + "</span><span class=\"caret\"></span></button>";
 			// disable changing the layout, if bootstrap columns aren't empty
 			var empty = true;
 			var cols = descriptor.element.children();
