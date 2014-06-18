@@ -124,7 +124,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 			});
 			//"change" evt better
 			$(".classes.form-control").keyup(function (event) {
-				el.attr("class", this.value);
+				el.attr("class", "row ig-component " + this.value);
 				// update code editor
 				// we are using very similar code to the one above
 				// think about refactoring !
