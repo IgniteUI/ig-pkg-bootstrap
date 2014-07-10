@@ -5,12 +5,12 @@ define(["./_default-component"], function (BootstrapComponent) {
 			return this;
 		},
 		render: function (container, descriptor) {
-			var $this = this, i, 
+			var $this = this, i, elementID = descriptor.element.attr("id") !== undefined ? descriptor.element.attr("id") : "",
 				parent = container.addClass("bootstrap-row-adorner"), 
 				el = descriptor.element, w = "150px";
 
 			container.empty(); // 168980
-
+			container.siblings(".adorner-custom-footer").hide();
 			// don't hardcode the default number of columns but take it from the running config
 			var currentVal, session = descriptor.editorSession;
 			if (el.hasClass("row")) {
@@ -47,6 +47,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 			$("#grid-layout-dd > li > a").click(function (event) {
 				// update value
 				var text = $(this).text();
+				descriptor.comp.config = text;
 				$('.btn-primary.dropdown-toggle').find(".label").text(text);
 				if (text === "Custom") {
 					$(".custom-layout.form-control").show();
@@ -94,12 +95,16 @@ define(["./_default-component"], function (BootstrapComponent) {
 				// now update the markup 
 				event.preventDefault();
 			});
+			$(".id.form-control").val(elementID);
 			// "change" is the better event here, but "keyup" is just so much cooler ! 
 			$(".id.form-control").keyup(function (event) {
 				var oldVal = el.attr("id");
 				el.attr("id", this.value);
 				// update code editor
-				// locate code fragment by marker
+			    // locate code fragment by marker
+				if (event.keyCode === 13) {
+				    $(event.target).blur();
+				}
 				// we only need the htmlmarker here
 				var htmlrange = descriptor.htmlMarker.range;
 				var r = new descriptor.rangeClass(htmlrange.start.row, 0, htmlrange.start.row, 1000);
@@ -122,8 +127,11 @@ define(["./_default-component"], function (BootstrapComponent) {
 			});
 			//"change" evt better
 			$(".classes.form-control").keyup(function (event) {
-				el.attr("class", this.value);
-				// update code editor
+				if (event.keyCode === 13) {
+				    $(event.target).blur();
+				}
+			    // update code editor
+				el.attr("class", "row ig-component " + this.value);
 				// we are using very similar code to the one above
 				// think about refactoring !
 				var htmlrange = descriptor.htmlMarker.range;
@@ -147,13 +155,15 @@ define(["./_default-component"], function (BootstrapComponent) {
 			});
 		},
 		_createMarkup: function (parent, width, descriptor) {
-			var markup = "";
+			var markup = "", layoutText = "4-4-4"; // default layoutText
 			markup += "<div class=\"adorner-label\">Id: </div><input type=\"text\" class=\"id form-control\"></input>";
 			markup += "<div class=\"adorner-label\">Classes: </div><input type=\"text\" class=\"classes form-control\"></input>";
 			markup += "<div class='adorner-label'>Grid Layout</div>";
 			markup += "<div class='btn-group'>";
-			markup += "<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'><span class='label'>Choose Layout </span><span class=\"caret\"></span></button>";
-
+			if (descriptor.comp.config) {
+				layoutText = descriptor.comp.config;
+			}
+			markup += "<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'><span class='label'>" + layoutText + "</span><span class=\"caret\"></span></button>";
 			// disable changing the layout, if bootstrap columns aren't empty
 			var empty = true;
 			var cols = descriptor.element.children();
