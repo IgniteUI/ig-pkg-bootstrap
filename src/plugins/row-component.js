@@ -125,6 +125,14 @@ define(["./_default-component"], function (BootstrapComponent) {
 				// component object any more
 				$this.settings.ide._updateId(oldVal, this.value);
 			});
+		    //Update class textBox 
+			var classVal = descriptor.element.attr("class");
+			classVal = classVal.replace("ig-component", "");
+			classVal = classVal.replace("selected-iframe", "");
+			classVal = classVal.replace("row", "");
+			classVal = classVal.trim();
+			classVal = classVal.replace(/\s+$/, "");
+			$(".classes.form-control").val(classVal);
 			//"change" evt better
 			$(".classes.form-control").keyup(function (event) {
 				if (event.keyCode === 13) {
@@ -148,6 +156,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 					code = code.replace("<div ", "<div class=\"" + this.value + "\" ");
 				}
 				session.replace(r, code);
+              
 			});
 			$(".custom-layout.form-control").change(function (event) {
 				// update code editor
