@@ -194,6 +194,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 				markup += "<li><a href=\"#\">10-2</a></li>";
 				markup += "<li><a href=\"#\">3-9</a></li>";
 				markup += "<li><a href=\"#\">9-3</a></li>";
+				markup += "<li><a href=\"#\">12</a></li>";
 				//A.T. 168952
 				//markup += "<li><a href=\"#\">Custom</a></li>";
 				markup += "</ul>";
