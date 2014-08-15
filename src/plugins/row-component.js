@@ -49,13 +49,14 @@ define(["./_default-component"], function (BootstrapComponent) {
 				var text = $(this).text();
 				descriptor.comp.config = text;
 				$('.btn-primary.dropdown-toggle').find(".label").text(text);
-				if (text === "Custom") {
-					$(".custom-layout.form-control").show();
-					event.preventDefault();
-					return;
-				} else {
-					$(".custom-layout.form-control").hide();
-				}
+				//A.M. 168952
+				//if (text === "Custom") {
+				//	$(".custom-layout.form-control").show();
+				//	event.preventDefault();
+				//	return;
+				//} else {
+				//	$(".custom-layout.form-control").hide();
+				//}
 				// update code editor
 				// change the layout based on the user selection
 				// try to keep existing contents, instead of wiping them out, if possible (Twitter jetstrap style)
