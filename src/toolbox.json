@@ -12,7 +12,8 @@
     }
   ],
   "stylesheets": [
-  	"bootstrap.min.css"
+  		"bootstrap.min.css",
+  		"bootstrap-package.css"
   ],
   "requiresInitialization": false,
   "configPath": "config",

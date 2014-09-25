@@ -21,3 +21,11 @@
 	padding: 5px;
 	border-bottom: 1px solid;
 }
+
+div.tab-content {
+	height: 100%;
+}
+
+div.tab-pane {
+	height: 100%;
+}

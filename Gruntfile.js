@@ -82,6 +82,7 @@ module.exports = function (grunt) {
                     dest: '<%= pkg.dist %>/<%= pkg.name %>',
                     src: [
                         'toolbox.json',
+                        'bootstrap-package.css',
                         'config/**',
                         'icons/**',
                         'plugins/**'

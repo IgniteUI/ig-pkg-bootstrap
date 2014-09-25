@@ -5,8 +5,8 @@ define(["./_default-component"], function (BootstrapComponent) {
 			return this;
 		},
 		getMarkup: function (descriptor) {
-			return 	"<div id=\"twopane1\" data-droppablechild=\"false\" style=\"height: 80%; border: 1px solid #2ECCFA;\">" +
-					"<div id=\"tabsContainer\" class=\"col-md-3 tabscontainer\">" + 
+			return 	"<div id=\"twopane1\" style=\"height: 80%; border: 1px solid #2ECCFA;\">" +
+					"<div id=\"tabsContainer\" class=\"col-md-3 tabscontainer\" data-hasdroppables=\"false\">" + 
 					"<ul class=\"nav nav-tabs nav-stacked\" role=\"tablist\" style=\"outline: 1px;\">" +
 				  	"<li class=\"active twopanetab\"><a href=\"#pane0\" role=\"tab\" data-toggle=\"tab\">Tab 1</a></li>" +
 				  	"<li class=\"twopanetab\"><a href=\"#pane1\" role=\"tab\" data-toggle=\"tab\">Tab 2</a></li>" +
@@ -26,7 +26,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 		},
 		getCodeEditorMarkupSnippet: function (descriptor) {
 			return {
-				codeString: descriptor.ide._tabStr(descriptor.extraIndent + 1) + "<div id=\"" + descriptor.id + "\">\n" +
+				codeString: descriptor.ide._tabStr(descriptor.extraIndent + 1) + "<div id=\"" + descriptor.id + "\" style=\"height: 80%; border: 1px solid #2ECCFA;\">\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 2) + "<div id=\"tabsContainer\" class=\"col-md-3 tabscontainer\">\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "<ul class=\"nav nav-tabs nav-stacked\" role=\"tablist\" style=\"outline: 1px;\">\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 4) + "<li class=\"active twopanetab\"><a href=\"#pane0\" role=\"tab\" data-toggle=\"tab\">Tab 1</a></li>\n" +
@@ -34,12 +34,12 @@ define(["./_default-component"], function (BootstrapComponent) {
 				descriptor.ide._tabStr(descriptor.extraIndent + 4) + "<li class=\"twopanetab\"><a href=\"#pane2\" role=\"tab\" data-toggle=\"tab\">Tab 3</a></li>\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "</ul>\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 2) + "</div>\n" +
-				descriptor.ide._tabStr(descriptor.extraIndent + 2) + "<div class=\"tab-content col-md-9\">\n" +
-				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "<div class=\"tab-pane active\" id=\"pane0\">\n" +
+				descriptor.ide._tabStr(descriptor.extraIndent + 2) + "<div class=\"tab-content col-md-9\" data-droppablechild=\"false\" data-hasdroppables=\"true\">\n" +
+				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "<div class=\"tab-pane active\" id=\"pane0\" data-droppablechild=\"true\">\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "</div>\n" +
-				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "<div class=\"tab-pane\" id=\"pane1\">\n" +
+				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "<div class=\"tab-pane\" id=\"pane1\" data-droppablechild=\"true\">\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "</div>\n" +
-				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "<div class=\"tab-pane\" id=\"pane2\">\n" +
+				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "<div class=\"tab-pane\" id=\"pane2\" data-droppablechild=\"true\">\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 3) + "</div>\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 2) + "</div>\n" +
 				descriptor.ide._tabStr(descriptor.extraIndent + 1) + "</div>\n",
@@ -52,9 +52,27 @@ define(["./_default-component"], function (BootstrapComponent) {
 		              colCount: 0
             		},
             		{
-		              rowOffset: 9,
+            		  rowOffset: 10,
 		              colOffset: 0,
-		              rowCount: 8, 
+		              rowCount: 8,
+		              colCount: 0
+            		},
+            		{
+		              rowOffset: 10,
+		              colOffset: 0,
+		              rowCount: 2, 
+		              colCount: 0
+		            },
+            		{
+		              rowOffset: 12,
+		              colOffset: 0,
+		              rowCount: 2, 
+		              colCount: 0
+		            },
+            		{
+		              rowOffset: 14,
+		              colOffset: 0,
+		              rowCount: 2, 
 		              colCount: 0
 		            }
 				]
