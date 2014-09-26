@@ -4,22 +4,14 @@
 	"iconsPath": "icons",
     "iconSpriteCssFile": "bootstrap-icons.css",
     "iconSpriteCssPrefix": "bootstrap-icons", 
-  "scripts": [
-  	{
-        "url": "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js",
-        "lazyLoad": true,
-        "id": "bootstrapjs"
-    }
-  ],
+  "scripts": [],
   "stylesheets": [
-  		"bootstrap.min.css",
-  		"bootstrap-package.css"
+  		"bootstrap.min.css"
   ],
   "requiresInitialization": false,
   "configPath": "config",
 	"pluginsPath": "plugins",
   "defaultComponentPlugin": "_default-component",
-  "requiresInitialization": true,
 	"components": {
 		"row": {
 			"id": "row",
@@ -45,19 +37,6 @@
 			"framework": false,
 			"width": "100%",
 			"height": "100%"
-		},
-		"twopane": {
-			"id": "twopane",
-			"dependsOn": ["bootstrapjs"],
-			"toolboxTitle": "Two Pane Toggle",
-			"componentPlugin": "two-pane-layout-component",
-			"icon": "rowicon.png",
-			"dragDropIcon": "row-dragdrop.png",
-			"category": "layout",
-			"visual": true,
-			"framework": false,
-			"width": "100%",
-			"height": "80%"
 		}
 	}
 }
