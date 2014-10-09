@@ -165,10 +165,10 @@ define(["./_default-component"], function (BootstrapComponent) {
 			});
 		},
 		_createMarkup: function (parent, width, descriptor) {
-			var markup = "", layoutText = "4-4-4"; // default layoutText
-			markup += "<div class=\"adorner-label\">Id: </div><input type=\"text\" class=\"id form-control\"></input>";
-			markup += "<div class=\"adorner-label\">Classes: </div><input type=\"text\" class=\"classes form-control\"></input>";
-			markup += "<div class='adorner-label'>Grid Layout</div>";
+			var markup = "", layoutText = "4-4-4", locale = $.plugin.bootstrap.locale; // default layoutText
+			markup += "<div class=\"adorner-label\">" + locale.id + ": </div><input type=\"text\" class=\"id form-control\"></input>";
+			markup += "<div class=\"adorner-label\">" + locale.classes + ": </div><input type=\"text\" class=\"classes form-control\"></input>";
+			markup += "<div class='adorner-label'>" + locale.gridLayout + "</div>";
 			markup += "<div class='btn-group'>";
 			if (descriptor.comp.config) {
 				layoutText = descriptor.comp.config;
@@ -204,7 +204,7 @@ define(["./_default-component"], function (BootstrapComponent) {
 			markup += "<input type=\"text\" class=\"custom-layout form-control\" style='display: none;' />";
 			parent.empty().append(markup);
 			if (!empty) {
-				parent.find(".btn-group").attr("title", "Cannot modify layout because default content has been modified.");
+				parent.find(".btn-group").attr("title", locale.defaultContentError);
 				parent.find("button").attr("disabled", "").css("color", "white");
 			}
 		}
